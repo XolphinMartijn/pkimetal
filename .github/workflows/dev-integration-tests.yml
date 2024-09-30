@@ -34,5 +34,5 @@ jobs:
           repository: XolphinMartijn/testsuite
           path: testsuite
 
-      - name: Run lint_the_linters.sh from testsuite repo
-        run: chmod +x testsuite/lint_the_linters.sh && testsuite/lint_the_linters.sh
+      - name: Run test suite
+        run: go run testsuite/test.go
