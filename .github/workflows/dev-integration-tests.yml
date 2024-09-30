@@ -35,4 +35,4 @@ jobs:
           path: testsuite
 
       - name: Run test suite
-        run: go run testsuite/test.go
+        run: cd testsuite; go run test.go
