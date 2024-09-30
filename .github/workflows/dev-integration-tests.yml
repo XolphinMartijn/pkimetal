@@ -17,7 +17,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker container
-        run: docker build --build-arg gomodfile=dev_go.mod -t pkimetal-dev -f Dockerfile.dev .
+        run: docker build --build-arg gomodfile=dev_go.mod -t pkimetal-dev .
 
       - name: Run Docker container
         run: docker run -d --name pkimetal-dev -p 8080:8080 pkimetal-dev
