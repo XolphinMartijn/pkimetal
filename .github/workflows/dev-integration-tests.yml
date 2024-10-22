@@ -1,7 +1,6 @@
 name: Dev-build integration test
 
 on:
-  push:
   pull_request:
 
 jobs:
