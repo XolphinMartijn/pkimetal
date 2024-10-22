@@ -64,7 +64,7 @@ jobs:
     - name: Auto-Merge PR
       if: env.dev_files_changed == 'true'
       run: |
-          gh pr merge -d -m
+          gh pr merge -d -m --auto "1"
 
     - name: Trigger Dev Container Build
       if: env.dev_files_changed == 'true'
