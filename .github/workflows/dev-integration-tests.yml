@@ -1,0 +1,38 @@
+name: Dev-build integration test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Integration Test for Development container
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker container
+        run: docker build --build-arg gomodfile=dev_go.mod -t pkimetal-dev .
+
+      - name: Run Docker container
+        run: docker run -d --name pkimetal-dev -p 8080:8080 pkimetal-dev
+    
+      - name: Wait for the container to be ready
+        run: |
+          until curl -s http://localhost:8080/; do
+            echo "Waiting for container..."
+            sleep 5
+          done
+
+      - uses: actions/checkout@master
+        with:
+          repository: XolphinMartijn/testsuite
+          path: testsuite
+
+      - name: Run test suite
+        run: cd testsuite; go run test.go
